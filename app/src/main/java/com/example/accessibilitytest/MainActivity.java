@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Accessibility";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 该辅助功能开关是否打开了
+     *
      * @param accessibilityServiceName：指定辅助服务名字
      * @param context：上下文
      * @return
      */
     private boolean isAccessibilitySettingsOn(String accessibilityServiceName, Context context) {
         int accessibilityEnable = 0;
-        String serviceName = context.getPackageName() + "/" +accessibilityServiceName;
+        String serviceName = context.getPackageName() + "/" + accessibilityServiceName;
         try {
             accessibilityEnable = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED, 0);
         } catch (Exception e) {
@@ -48,19 +50,20 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        }else {
-            Log.d(TAG,"Accessibility service disable");
+        } else {
+            Log.d(TAG, "Accessibility service disable");
         }
         return false;
     }
 
     /**
      * 跳转到系统设置页面开启辅助功能
+     *
      * @param accessibilityServiceName：指定辅助服务名字
      * @param context：上下文
      */
-    private void openAccessibility(String accessibilityServiceName, Context context){
-        if (!isAccessibilitySettingsOn(accessibilityServiceName,context)) {
+    private void openAccessibility(String accessibilityServiceName, Context context) {
+        if (!isAccessibilitySettingsOn(accessibilityServiceName, context)) {
             Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
             startActivity(intent);
         }
